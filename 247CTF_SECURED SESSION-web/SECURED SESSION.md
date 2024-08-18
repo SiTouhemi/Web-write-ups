@@ -42,7 +42,7 @@ def index():
 
 @app.route('/')
 def source():
-    return "<pre>%s</pre>" % open(__file__).read()
+    return 
 
 if __name__ == "__main__":
     app.run()
