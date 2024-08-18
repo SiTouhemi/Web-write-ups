@@ -12,6 +12,7 @@ Begin by accessing the web application provided for the challenge.
 The challenge provides the following Python Flask code:
 
 
+
 import os
 from flask import Flask, request, session
 from flag import flag
@@ -60,6 +61,7 @@ After researching Flask sessions, I discovered they are similar to JSON Web Toke
 
 By pasting the cookie into the JWT.io decoder, we can view its contents, which includes the flag data, base64-encoded. Decode the base64 string to reveal the flag:
 
+bash
 
 $ echo "MjQ3Q1RGe2RhODA3OTVmOGE1Y2FiMmUwMzdkNzM4NTgwN2I5YTkxfQ==" | base64 -d
 The decoded output will be the flag:
