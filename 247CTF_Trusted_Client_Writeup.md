@@ -19,7 +19,7 @@ The task is to assess a web application where credentials are stored on the clie
 
 - Press `Ctrl + U` to view the source code. You'll notice that the JavaScript code is obfuscated.
   
-  ![Obfuscated Code Screenshot](image-path)
+  ![Description of the image](Capture d'écran 2024-08-18 174051.png)
 
 ### 3. Look for Obfuscated Data:
 
