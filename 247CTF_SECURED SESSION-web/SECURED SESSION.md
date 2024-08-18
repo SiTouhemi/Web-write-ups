@@ -44,7 +44,7 @@ if __name__ == "__main__":
     app.run()
 Analyzing the code, we see that it relies on cookies and a random key. Let’s check our cookies:
 
-
+image1.png
 
 The cookies don’t contain the key. Let’s try visiting /flag to see the response.
 
