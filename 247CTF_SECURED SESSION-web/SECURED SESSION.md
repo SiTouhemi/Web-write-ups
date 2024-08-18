@@ -58,8 +58,7 @@ a random key so , lets check our cookie :
 
 Notice that theres no session cookies . Lets check /flag:
 
-![](./image2.png){width="6.531944444444444in"
-height="2.097916666666667in"}
+![](./image2.png)
 
 It says Incorrect Key! We know that the key is stored in our cookie
 session , lets analyze it than .
@@ -71,8 +70,7 @@ I realized that flask cookies are same as Json Web Tokens (JWT) were its
 data separted by a dot (' . ') .
 
 Found this website to analyse JWT cookie <https://jwt.io>
-![](./image3.png){width="6.531944444444444in"
-height="3.502083333333333in"}
+![](./image3.png)
 
 By pasting the cookies you will see its content and flag data clearly
 base64 encoded .
