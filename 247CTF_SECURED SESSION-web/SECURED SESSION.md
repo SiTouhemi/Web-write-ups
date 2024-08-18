@@ -57,6 +57,7 @@ a random key so , lets check our cookie :
 
 ![](./image1.png)
 
+nothing there , maybe visit /flag ?
 ### 3. checking provided information
 
 Notice that theres no session cookies . Lets check /flag:
