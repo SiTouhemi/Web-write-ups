@@ -1,15 +1,20 @@
-Secured Session (Web)
-Intro
-This is my write-up for the Web challenge "Secured Session" on the CTF site 247CTF.com.
+# Secured Session (Web)
 
-Challenge Details
+## Intro
+
+This is my write-up for the Web challenge "Secured Session" on the CTF site [247CTF.com](https://247ctf.com/).
+
+## Challenge Details
+
 The challenge involves guessing a random secret key to retrieve a flag securely stored in your session.
 
-Steps to Solve
-1. Access the Application
+## Steps to Solve
+
+### 1. Access the Application
+
 Start by accessing the web application provided for the challenge.
 
-2. Analyze the Provided Python Code
+### 2. Analyze the Provided Python Code
 The provided Python Flask code is as follows:
 
 import os
