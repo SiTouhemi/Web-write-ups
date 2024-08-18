@@ -1,22 +1,16 @@
-Secured Session (web)
+Secured Session (Web)
+This is my write-up for the Web challenge "Secured Session" on the CTF site 247CTF.com.
 
-# Intro
+Challenge Details
+The challenge involves guessing a random secret key to retrieve a flag securely stored in your session.
 
-This is my write-up of a Web challenge Secured Session on the CTF
-site [247CTF.com](https://247ctf.com/)
+Steps to Solve
+1. Access the Application
+Begin by accessing the web application provided for the challenge.
 
-## Challenge Details
+2. Analyze the Provided PHP Code
+The challenge provides the following Python Flask code:
 
-If you can guess our random secret key, we will tell you the flag
-securely stored in your session.
-
-## Steps to Solve
-
-### 1. Access the Application:
-
--   Start by accessing the web application provided for the challenge.
-
-### 2. Read the php code provided
 
 import os
 from flask import Flask, request, session
@@ -37,50 +31,38 @@ def index():
     secret_key = secret_key_to_int(request.args['secret_key']) if 'secret_key' in request.args else None
     session['flag'] = flag
     if secret_key == app.config['SECRET_KEY']:
-      return session['flag']
+        return session['flag']
     else:
-      return "Incorrect secret key!"
+        return "Incorrect secret key!"
 
 @app.route('/')
 def source():
-    return "
-%s
-" % open(__file__).read()
+    return "<pre>%s</pre>" % open(__file__).read()
 
 if __name__ == "__main__":
     app.run()
+Analyzing the code, we see that it relies on cookies and a random key. Let’s check our cookies:
 
 
-    
-After After analysing the code we notice that its all about cookies and
-a random key so , lets check our cookie :
 
-![](./image1.png)
+The cookies don’t contain the key. Let’s try visiting /flag to see the response.
 
-nothing there , maybe visit /flag ?
-### 3. checking provided information
+3. Check the Response
+When visiting /flag, we get the following response:
 
- After checking /flag we found :
 
-![](./image2.png)
 
-It says Incorrect Key! We know that the key is stored in our cookie
-session , lets analyze it than .
+The message indicates that the key is incorrect. Since the key is stored in the session cookie, let's analyze the cookie.
 
-After googling abouf Flask sessions I found this website :
-<https://www.bordergate.co.uk/flask-session-cookies/> .
+After researching Flask sessions, I discovered they are similar to JSON Web Tokens (JWT), where data is separated by dots (.). To analyze the JWT cookie, use a tool like jwt.io.
 
-I realized that flask cookies are same as Json Web Tokens (JWT) were its
-data separted by a dot (' . ') .
 
-Found this website to analyse JWT cookie <https://jwt.io>
-![](./image3.png)
 
-By pasting the cookies you will see its content and flag data clearly
-base64 encoded .
+By pasting the cookie into the JWT.io decoder, we can view its contents, which includes the flag data, base64-encoded. Decode the base64 string to reveal the flag:
 
-Decode it and booom! \$ echo
-\"MjQ3Q1RGe2RhODA3OTVmOGE1Y2FiMmUwMzdkNzM4NTgwN2I5YTkxfQ==\" \| base64
--D
+
+$ echo "MjQ3Q1RGe2RhODA3OTVmOGE1Y2FiMmUwMzdkNzM4NTgwN2I5YTkxfQ==" | base64 -d
+The decoded output will be the flag:
+
 
 247CTF{xxxxxxxx}
