@@ -46,6 +46,8 @@ def source():
 
 if __name__ == "__main__":
     app.run()
+
+    
 Analyzing the code, we see it involves cookies and a random key. Let’s check our cookies:
 
 ![](./image1.png)
