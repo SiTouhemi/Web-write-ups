@@ -60,7 +60,7 @@ a random key so , lets check our cookie :
 nothing there , maybe visit /flag ?
 ### 3. checking provided information
 
-Notice that theres no session cookies . Lets check /flag:
+ After checking /flag we found :
 
 ![](./image2.png)
 
