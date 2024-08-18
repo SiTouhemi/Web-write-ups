@@ -19,58 +19,36 @@ securely stored in your session.
 ### 2. Read the php code provided
 
 import os
-
 from flask import Flask, request, session
-
 from flag import flag
 
-app = Flask(\_\_name\_\_)
-
-app.config\[\'SECRET_KEY\'\] = os.urandom(24)
+app = Flask(__name__)
+app.config['SECRET_KEY'] = os.urandom(24)
 
 def secret_key_to_int(s):
+    try:
+        secret_key = int(s)
+    except ValueError:
+        secret_key = 0
+    return secret_key
 
-try:
-
-secret_key = int(s)
-
-except ValueError:
-
-secret_key = 0
-
-return secret_key
-
-\@app.route(\"/flag\")
-
+@app.route("/flag")
 def index():
+    secret_key = secret_key_to_int(request.args['secret_key']) if 'secret_key' in request.args else None
+    session['flag'] = flag
+    if secret_key == app.config['SECRET_KEY']:
+      return session['flag']
+    else:
+      return "Incorrect secret key!"
 
-secret_key = secret_key_to_int(request.args\[\'secret_key\'\]) if
-\'secret_key\' in request.args else None
-
-session\[\'flag\'\] = flag
-
-if secret_key == app.config\[\'SECRET_KEY\'\]:
-
-return session\[\'flag\'\]
-
-else:
-
-return \"Incorrect secret key!\"
-
-\@app.route(\'/\')
-
+@app.route('/')
 def source():
-
-return \"
-
+    return "
 %s
+" % open(__file__).read()
 
-\" % open(\_\_file\_\_).read()
-
-if \_\_name\_\_ == \"\_\_main\_\_\":
-
-app.run()
-
+if __name__ == "__main__":
+    app.run()
 After After analysing the code we notice that its all about cookies and
 a random key so , lets check our cookie :
 
