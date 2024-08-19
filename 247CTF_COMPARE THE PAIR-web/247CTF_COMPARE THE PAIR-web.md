@@ -1,20 +1,29 @@
 # COMPARE THE PAIR (Web)
 
-## Intro  
+## Intro
 This is my write-up for the Web challenge "Secured Session" on the CTF site 247CTF.com.
 
-## Challenge Details  
-The challenge involves finding a way to bypass the login logic using something related to `md5`. 
+## Challenge Details
+The challenge involves guessing a way to bypass the login logic with something about md5.
 
 ## Steps to Solve
 
-### 1. Access the Application  
+### 1. Access the Application
 Start by accessing the web application provided for the challenge.
 
 ### 2. Analyze the Provided PHP Code
+
 php
 <?php
-require_once('flag.php'); $password_hash = "0e902564435691274142490923013038"; $salt = "f789bbc328a3d1a3"; if(isset($_GET['password']) && md5($salt . $_GET['password']) == $password_hash){ echo $flag; } echo highlightfile(_FILE, true); ?> ```
+  require_once('flag.php');
+  $password_hash = "0e902564435691274142490923013038";
+  $salt = "f789bbc328a3d1a3";
+  if(isset($_GET['password']) && md5($salt . $_GET['password']) == $password_hash){
+    echo $flag;
+  }
+  echo highlight_file(__FILE__, true);
+?>
+
 
 The code takes the $salt and concatenates it with our $password input, then md5 hashes it to compare with the $password_hash.
 
@@ -23,39 +32,83 @@ We have no information about what the password might be, and brute-forcing it co
 The vulnerability occurs in the == comparison.
 
 ### 3. Understanding the Vulnerability
-In PHP, the comparison operator == checks two values for equality, performing type juggling. This means PHP attempts to convert the values to a common type before making the comparison.
 
-Key Points About == in PHP:
-Type Juggling: PHP automatically converts operand data types when using ==. For example: php if (5 == "5") { echo "Equal"; } Here, "5" (a string) is converted to an integer, so the comparison returns true.
+In PHP, the comparison operator == is used to compare two values for equality. It checks if the values are equal after performing type juggling, which means PHP will try to convert the values to a common type before making the comparison.
 
-Loose Comparison: == is known as a "loose comparison." For instance: php if (0 == false) { echo "Equal"; } In this case, 0 is equivalent to false, returning true.
+#### Key Points About == in PHP:
 
-Common Pitfalls:
+1. **Type Juggling**: PHP automatically converts the data types of the operands to a common type when using ==. For example:
 
-Comparing different types can yield unexpected results: php if ("0" == false) { echo "Equal"; } Here, the string "0" is treated as false, leading to a true comparison.
-Additionally, the format of $password_hash resembles a large number starting with 0e.... When 0e1234 is compared using ==, PHP treats it as the number 0:
+   
+php
+   if (5 == "5") {
+       echo "Equal";
+   }
 
+   In this case, "5" (a string) is converted to an integer, so the comparison 5 == "5" returns true.
+
+2. **Loose Comparison**: Because of type juggling, == is known as a "loose comparison." For example:
+
+   
+php
+   if (0 == false) {
+       echo "Equal";
+   }
+
+   Here, 0 is considered equivalent to false, so the comparison returns true.
+
+3. **Common Pitfalls**:
+   - Comparing different types can lead to unexpected results:
+
+     
+php
+     if ("0" == false) {
+         echo "Equal";
+     }
+
+     The string "0" is treated as false when loosely compared, so this would also return true.
+
+Also, we can see that the format of the $password_hash looks like a very large number starting with 0e....
+
+When you compare a string like 0e1234 to other values using ==, PHP treats 0e1234 as a number, specifically the number 0. This can lead to surprising results:
+
+php
 if ("0e1234" == 0) {
     echo "Equal";
 } else {
     echo "Not Equal";
 }
-Output: "Equal"
+
+
+**Output**: "Equal"
 
 ### 4. Exploiting the Vulnerability
-The vulnerability is clear: we need to find a password such that when concatenated with $salt, its md5 hash generates a string that appears like a large number (starts with 0e followed by digits).
 
-Here's a Python script to help with this:
+The vulnerability is clear now: all we have to do is find a password that, when concatenated with $salt, its md5 hash generates a string that looks like a large number (starts with 0e and the rest are numbers).
 
-from itertools import product  
-import hashlib
+I didn't know how to create the code that could help us, but I found a code in another write-up:
 
-for x in range(0, 10):
+python
+from itertools import product  # Import the product function from itertools to generate combinations
+import hashlib  # Import the hashlib module for generating MD5 hashes
+
+# Iterate through different lengths of the combination
+for x in range(0, 10):  # Loop over lengths from 0 to 9 (inclusive)
+    # Generate all possible combinations of the alphabet with the current length 'x'
     for combo in product("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", repeat=x):
+        # Create the string to hash by appending the current combination to the fixed string
         result = hashlib.md5(("f789bbc328a3d1a3" + ''.join(combo)).encode()).hexdigest()
-        if result.startswith("0e") and result[2:].isdigit():
+
+        # Check if the resulting hash has the desired properties
+        if result.startswith("0e") and result[2:].isdigit():  # Look for a hash that starts with '0e' and is followed only by digits
+            # If a matching hash is found, print the string that generated it
             print("f789bbc328a3d1a3" + ''.join(combo))
-Any resulting password can be sent to the server as ?password=xxxxxx. Finally, we can retrieve the flag!
+        else:
+            pass  # If the hash doesn't match the criteria, do nothing and continue
+
+
+Any result we get, we send it to the server with ?password=xxxxxx. Finally, we get the flag!
+
 
 
 ### Resources 
