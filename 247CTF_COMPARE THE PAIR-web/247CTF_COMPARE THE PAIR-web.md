@@ -4,7 +4,7 @@
 This is my write-up for the Web challenge "Secured Session" on the CTF site 247CTF.com.
 
 ## Challenge Details  
-The challenge involves finding a way to bypass the login logic using something related to `md5`.
+The challenge involves finding a way to bypass the login logic using something related to `md5`. 
 
 ## Steps to Solve
 
