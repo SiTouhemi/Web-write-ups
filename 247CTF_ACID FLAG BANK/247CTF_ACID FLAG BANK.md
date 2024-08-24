@@ -1,7 +1,6 @@
-**\#** [ACID FLAG BANK](https://247ctf.com/dashboard#collapse-c61)
-**(Web)**
+# ACID FLAG BANK (web)
 
-**\## Intro**
+## Intro
 
 This is my write-up for the Web challenge \"[ACID FLAG
 BANK](https://247ctf.com/dashboard#collapse-c61)\" on the CTF site
