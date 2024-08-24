@@ -153,7 +153,7 @@ Change the "Send" button to "Send group (parallel)":
 ![Image 3](image3.png)
 
 
-We got a 200 response in only one request. Let's reset the funds and try again with more duplicated requests:
+I got a 200 response in only one request. Let's reset the funds and try again with more duplicated requests:
 
 ![Image 5](image5.png)
 
