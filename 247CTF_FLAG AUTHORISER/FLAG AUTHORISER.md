@@ -16,7 +16,7 @@ Start by accessing the web application provided for the challenge.
 
 ### 2. Analyze the Provided PHP Code
 
-'''python
+```python
 from flask import Flask, redirect, url_for, make_response, render_template, flash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_optional, get_jwt_identity
 from secret import secret, admin_flag, jwt_secret
@@ -84,11 +84,9 @@ Check here for more info: https://www.freecodecamp.org/news/crack-passwords-usin
 Place the token in a file and run this command (247CTF mentioned that we can use rockyou.txt as a wordlist to crack it faster instead of brute-forcing):
 
 bash
-Toujours afficher les détails
-
 Copier le code
 john --wordlist=/usr/share/wordlists/rockyou.txt jwt.txt  # token stored in jwt.txt
-3. Forging the Token
+###3. Forging the Token
 Take the token, put it again in https://www.jwt.io.
 
 We know the identity needs to be admin, so set that up in the parameters.
