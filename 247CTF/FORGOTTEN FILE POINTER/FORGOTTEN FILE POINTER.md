@@ -1,19 +1,19 @@
-﻿FORGOTTEN FILE POINTER (web)
-Intro
+# ﻿FORGOTTEN FILE POINTER (web)
+##Intro
 
 This is my write-up for the web challenge "FORGOTTEN FILE POINTER" on the CTF site 247CTF.com.
 
-Challenge Details
+## Challenge Details
 
 The challenge involves finding a way to read and print the flag through path traversal.
 
-Steps to Solve
+## Steps to Solve
 
-1. Access the Application
+### 1. Access the Application
 
 Start by accessing the web application provided for the challenge.
 
-2. Analyze the Provided Code
+### 2. Analyze the Provided Code
 
 php
 Copier le code
@@ -45,17 +45,17 @@ In Linux, everything is stored as a file somehow. For example, /proc is sometime
 
 I discovered that every file is open at /proc/$PID/fd/$fd, but we don’t know the process ID. Thus, we need to navigate to /dev/fd/$fd, which is often a symbolic link to /proc/self/fd/$fd.
 
-2. Exploiting the Vulnerability
+### 2. Exploiting the Vulnerability
 
 Now we know that the ?include=/dev/fd/$fd parameter points to our flag file, but we don’t know the value of $fd. We can brute force it using Burp Suite.
-![Alt text](image1.png)
+
 First, capture the request, select the $fd, and send it to Intruder.
-![Alt text](image2.png)
+![Alt text](image1.png)
 
 Second, adjust the payload parameter to brute force.
-![Alt text](image3.png)
+![Alt text](image2.png)
 Once we find the $fd, just visit the response, and you’ll find the flag.
-
+![Alt text](image3.png)
 Resources that helped me in my search
 
 [HackMD on file descriptors](https://hackmd.io/@Chivato/rkj-Y1GVI)
