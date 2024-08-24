@@ -16,7 +16,7 @@ Start by accessing the web application provided for the challenge.
 
 ### 2. Analyze the Provided PHP Code
 
-
+'''python
 from flask import Flask, redirect, url_for, make_response, render_template, flash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_optional, get_jwt_identity
 from secret import secret, admin_flag, jwt_secret
