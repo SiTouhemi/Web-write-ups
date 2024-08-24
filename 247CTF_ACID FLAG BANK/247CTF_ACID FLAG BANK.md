@@ -110,9 +110,9 @@ if (isset($_GET['dump'])) {
 ```
 The PHP script manages user funds in an SQLite database, allowing fund transfers, resets, and flag retrieval based on user validation. Users with more than 247 funds can buy the flag, while fund transfers must adhere to specified conditions. It includes functions to dump user data, validate users, and clean input values.
 
-##Steps to Solve
+## Steps to Solve
 
-###1. Understanding and Identifying the Vulnerability
+### 1. Understanding and Identifying the Vulnerability
 Let's try to transfer funds from ID 1 to ID 2:
 
 ```vbnet
