@@ -132,7 +132,7 @@ We can see that there is a lot of processing happening before the transfer occur
 
 This indicates that there is a race condition vulnerability in the transfer function.
 
-### Explanation:
+### Explanation
 
 A race condition vulnerability occurs when the outcome of a process depends on the timing or order of events, often because the code does not properly synchronize access to shared resources or performs checks only after executing actions.
 
