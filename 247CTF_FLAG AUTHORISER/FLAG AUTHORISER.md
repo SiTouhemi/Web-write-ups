@@ -85,9 +85,9 @@ Check here for more info: https://www.freecodecamp.org/news/crack-passwords-usin
 
 Place the token in a file and run this command (247CTF mentioned that we can use rockyou.txt as a wordlist to crack it faster instead of brute-forcing):
 
-bash
-Copier le code
+```bash
 john --wordlist=/usr/share/wordlists/rockyou.txt jwt.txt  # token stored in jwt.txt
+```
 ###3. Forging the Token
 Take the token, put it again in https://www.jwt.io.
 
