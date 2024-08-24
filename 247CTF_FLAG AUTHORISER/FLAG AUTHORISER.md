@@ -66,8 +66,8 @@ if __name__ == "__main__":
 '''
 Reviewing the code shows us that we are looking at a Flask web app that uses JWT (JSON Web Token). Visiting /flag will give us our token with identity='anonymous'. Our goal is to find how to change the anonymous JWT data to admin.
 
-Steps to Solve
-1. Obtaining a Valid Cookie
+##Steps to Solve
+###1. Obtaining a Valid Cookie
 Visit /flag and copy the access_token, then visit https://jwt.io to see what data we got.
 
 Let's change the identity to admin and replace the token with the new one.
@@ -76,7 +76,7 @@ Of course, it doesn't work 😂, so let's Google it.
 
 We know that there's a secret key required for the token, which is why we got an error after trying the admin token.
 
-2. Cracking the Token
+###2. Cracking the Token
 With some Google searching, I found that cracking the secret key is possible using John the Ripper.
 
 Check here for more info: https://www.freecodecamp.org/news/crack-passwords-using-john-the-ripper-pentesting-tutorial/
@@ -97,5 +97,5 @@ Add the secret.
 
 Place the new token in the /flag route, and you'll get the flag.
 
-Resources
+###Resources
 https://www.freecodecamp.org/news/crack-passwords-using-john-the-ripper-pentesting-tutorial/
