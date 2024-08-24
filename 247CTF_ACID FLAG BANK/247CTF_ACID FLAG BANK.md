@@ -127,7 +127,7 @@ http://yourserver.com/yourfile.php?dump
 Yes, we see 247 in ID 2 and 0 in ID 1.
 
 We can see that there is a lot of processing happening before the transfer occurs:
-
+![Image 1](image1.png)
 
 
 This indicates that there is a race condition vulnerability in the transfer function.
@@ -142,6 +142,7 @@ You can read more about this vulnerability at PortSwigger's guide on race condit
 Theoretically, if we send multiple requests almost simultaneously to transfer money between accounts, the checks for both requests might be processed at the same time. As a result, both requests could pass the checks and execute the transactions concurrently.
 
 First, open Burp Suite and capture the transfer funds request:
+![Image 2](image2.png)
 
 
 
@@ -149,10 +150,12 @@ Second, send it to Repeater. Right-click on the request, then go to the "Tab" gr
 
 Change the "Send" button to "Send group (parallel)":
 
+![Image 3](image3.png)
 
 
 We got a 200 response in only one request. Let's reset the funds and try again with more duplicated requests:
 
+![Image 5](image5.png)
 
 
 Now we get a 200 response in many tabs.
