@@ -164,7 +164,7 @@ Check the funds with ?dump:
 
 
 
-Finally, it worked, and we have more than 247 funds. We can now buy the flag using:
+Finally, it worked, and we have more than 247 funds :). We can now buy the flag using:
 
 ```csharp
 ?flag=1&from=2
