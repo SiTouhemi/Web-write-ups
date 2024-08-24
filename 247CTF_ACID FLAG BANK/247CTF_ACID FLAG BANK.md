@@ -1,5 +1,5 @@
-#ACID FLAG BANK (web)
-##Intro
+# ACID FLAG BANK (web)
+## Intro
 This is my write-up for the web challenge "ACID FLAG BANK" on the CTF site 247CTF.com.
 
 ## Challenge Details
