@@ -16,7 +16,7 @@ Start by accessing the web application provided for the challenge.
 
 ### 2. Analyze the Provided PHP Code
 
-```python
+
 from flask import Flask, redirect, url_for, make_response, render_template, flash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_optional, get_jwt_identity
 from secret import secret, admin_flag, jwt_secret
@@ -63,7 +63,7 @@ def source():
 
 if __name__ == "__main__":
     app.run()
-'''
+
 Reviewing the code shows us that we are looking at a Flask web app that uses JWT (JSON Web Token). Visiting /flag will give us our token with identity='anonymous'. Our goal is to find how to change the anonymous JWT data to admin.
 
 ##Steps to Solve
