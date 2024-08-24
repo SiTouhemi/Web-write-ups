@@ -64,7 +64,7 @@ def source():
 if __name__ == "__main__":
     app.run()
 
-'''
+```
 
 Reviewing the code shows us that we are looking at a Flask web app that uses JWT (JSON Web Token). Visiting /flag will give us our token with identity='anonymous'. Our goal is to find how to change the anonymous JWT data to admin.
 
