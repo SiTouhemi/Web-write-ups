@@ -27,7 +27,7 @@ Copier le code
 ?>
 Steps to Solve
 
-1. Understanding and Identifying the Vulnerability
+### 1. Understanding and Identifying the Vulnerability
 
 The vulnerability in this PHP code is Local File Inclusion (LFI).
 
