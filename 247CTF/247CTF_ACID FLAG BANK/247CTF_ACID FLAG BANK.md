@@ -14,8 +14,7 @@ Start by accessing the web application provided for the challenge.
 
 ### 2. Analyze the Provided Code
 ```python
-php
-Copier le code
+
 <?php
 require_once('flag.php');
 
